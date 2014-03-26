@@ -7,6 +7,7 @@
 *  Paul Ramsey <pramsey@opengeo.org>, OpenGeo
 *
 ******************************************************************************/
+/* patrick */
 
 #include "ght_core.h"
 
