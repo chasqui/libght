@@ -8,6 +8,7 @@
 *
 ******************************************************************************/
 /* patrick */
+/* test 2 */
 
 #include "ght_core.h"
 
@@ -58,6 +59,11 @@ GhtErr ght_node_add_attribute(GhtNodePtr node, GhtAttributePtr attribute);
 
 /** Get the attribute list handing off the node */
 GhtErr ght_node_get_attributes(const GhtNodePtr node, GhtAttributePtr *attr);
+
+/** Get hash
+GhtErr ght_node_get_children_list(const GhtNodePtr node);
+
+
 
 
 /***********************************************************************
