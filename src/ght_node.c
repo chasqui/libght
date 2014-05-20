@@ -864,23 +864,16 @@ ght_node_set_z_avg(GhtNode *node, double z_avg)
 /* TODO Recursively calculate Z average for a tree of GhtNodes */
 //return ght_node_calculate_z(tree->root);
 GhtErr
-ght_node_calculate_z(const GhtNode *node, GhtAttribute *attr)
+ght_node_calculate_z(const GhtNode *node, GhtAttribute *attr, GhtSchema *schema)
 {
+
+    printf (">> ght_node_calculate_z() \n");
+
 	static int hash_array_len = GHT_MAX_HASH_LENGTH + 1;
 	GhtHash h[hash_array_len];
 	GhtAttribute *a;
 
-	// TODO VÃ©rifier l'access au hash de chaque noeud
-
-	/* Add our part of the hash to the incoming part */
-	/*
-    memset(h, 0, hash_array_len);
-    strncpy(h, hash, hash_array_len);
-    if ( node->hash )
-    {
-        strcat(h, node->hash);
-    }
-	 */
+	// TODO Vérifier l'access au hash de chaque noeud
 
 	/* Make a copy of all the incoming attributes */
 	GHT_TRY(ght_attribute_union(node->attributes, attr, &a));
@@ -891,7 +884,7 @@ ght_node_calculate_z(const GhtNode *node, GhtAttribute *attr)
 		int i;
 		for ( i = 0; i < node->children->num_nodes; i++ )
 		{
-			GHT_TRY(ght_node_calculate_z(node->children->nodes[i], a ));
+			GHT_TRY(ght_node_calculate_z(node->children->nodes[i], a, schema ));
 		}
 		double acc = 0; int k;
 		for ( k = 0; k < node->children->num_nodes; k++ )
@@ -906,7 +899,41 @@ ght_node_calculate_z(const GhtNode *node, GhtAttribute *attr)
 	/* This is a leaf node, create a new node and add to list */
 	else
 	{
-		GHT_TRY(ght_node_set_z_avg( node, 22 ));
+	    // printf (">> Dans une feuille \n");
+	    double valeur;
+
+		// *** DEBUT ***
+		// TODO On a besoin d'une fonction plus géneral
+		// Pour l'instant on va le tester avec la dimension "elevation" = Z
+
+		GhtDimension *dim;
+		GhtAttribute found;
+
+		/*
+	    int num_dims;
+	    GHT_TRY( ght_schema_get_num_dimensions( schema, &num_dims) );
+	    printf ("> num dimension %i \n ", num_dims);
+		*/
+
+		//GhtErr ght_schema_get_dimension_by_name(const GhtSchema *schema, const char *name, GhtDimension **dim)
+		GHT_TRY( ght_schema_get_dimension_by_name(schema, "Z", &dim) );
+
+		/*
+		const char *name_dim ;
+		ght_dimension_get_name(dim,&name_dim);
+		printf("> Name of dimension: ");
+		puts(name_dim);
+		*/
+		//GhtErr ght_attribute_get_by_dimension(const GhtAttribute *attr, const GhtDimension *dim, GhtAttribute *found)
+		GHT_TRY( ght_attribute_get_by_dimension(a, dim, &found) );
+
+		//GhtErr ght_attribute_get_value(const GhtAttribute *attr, double *val)
+		GHT_TRY( ght_attribute_get_value(&found, &valeur) );
+
+		//printf ("> VALEUR %g \n ", valeur);
+
+		GHT_TRY( ght_node_set_z_avg(node, valeur) );
+		// *** FIN ***
 
 		/*   GhtNode *n;
         GHT_TRY(ght_node_new_from_hash(h, &n));
@@ -917,7 +944,6 @@ ght_node_calculate_z(const GhtNode *node, GhtAttribute *attr)
         double d;
         GHT_TRY(ght_attribute_get_value(attr, &d));
         ght_attribute_get_value
-
 		 */
 	}
 	return GHT_OK;

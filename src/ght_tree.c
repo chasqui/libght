@@ -328,13 +328,13 @@ ght_tree_get_numpoints(const GhtTree *tree, int *numpoints)
 GhtErr
 ght_tree_calculate_z_average(const GhtTree *tree)
 {
-    printf (">> Dans l'implementation « ght_tree_calculate_z_average »\n");
-//  GhtHash h[1];
-//  h[0] = '\0';
-    if ( ! tree->root ) return GHT_ERROR;
-    return ght_node_calculate_z(tree->root, NULL);
-}
+    GhtSchema *schema;
+    GHT_TRY( ght_tree_get_schema(tree, &schema) );
 
+    if ( ! tree->root )
+    	return GHT_ERROR;
+    return ght_node_calculate_z(tree->root, NULL, schema);
+}
 
 // TODO Get root from tree
 GhtErr
