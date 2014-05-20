@@ -60,9 +60,11 @@ GhtErr ght_node_add_attribute(GhtNodePtr node, GhtAttributePtr attribute);
 /** Get the attribute list handing off the node */
 GhtErr ght_node_get_attributes(const GhtNodePtr node, GhtAttributePtr *attr);
 
+// TODO get Z average
+GhtErr ght_node_get_z_avg(const GhtNodePtr node, double *z_avg);
+
 /** Get hash
 GhtErr ght_node_get_children_list(const GhtNodePtr node);
-
 
 
 
@@ -209,6 +211,11 @@ GhtErr ght_config_init(GhtConfigPtr config);
 /** Take in a tree and output a populated GhtNodeList, creates complete copy of data */
 GhtErr ght_tree_to_nodelist(const GhtTreePtr tree, GhtNodeListPtr nodelist);
 
+// TODO Get root
+GhtErr ght_tree_get_root(const GhtTreePtr tree, GhtNodePtr *root);
+
+// TODO Calculate Z average
+GhtErr ght_tree_calculate_z_average(const GhtTreePtr tree);
 
 /***********************************************************************
 *   WRITER

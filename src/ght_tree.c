@@ -321,3 +321,28 @@ ght_tree_get_numpoints(const GhtTree *tree, int *numpoints)
         return GHT_ERROR;
     }
 }
+
+// TODO Calculate Z average implementation
+// Cette fonction retourne l'arbre avec le calcul de la moyenne de Z dans "z_avg" pour tous les noeuds
+
+GhtErr
+ght_tree_calculate_z_average(const GhtTree *tree)
+{
+    printf (">> Dans l'implementation « ght_tree_calculate_z_average »\n");
+//  GhtHash h[1];
+//  h[0] = '\0';
+    if ( ! tree->root ) return GHT_ERROR;
+    return ght_node_calculate_z(tree->root, NULL);
+}
+
+
+// TODO Get root from tree
+GhtErr
+ght_tree_get_root(const GhtTree *tree, GhtNode **root)
+{
+    if (! tree->root)
+        return GHT_ERROR;
+
+    *root = tree->root;
+    return GHT_OK;
+}
