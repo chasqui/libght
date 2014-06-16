@@ -63,6 +63,10 @@ GhtErr ght_node_get_attributes(const GhtNodePtr node, GhtAttributePtr *attr);
 // TODO get Z average
 GhtErr ght_node_get_z_avg(const GhtNodePtr node, double *z_avg);
 
+
+GhtErr
+ght_node_get_hash(const GhtNodePtr node, GhtHash **hash)
+
 /** Get hash
 GhtErr ght_node_get_children_list(const GhtNodePtr node);
 
@@ -250,6 +254,12 @@ GhtErr ght_reader_new_mem(const unsigned char *bytes_start, size_t bytes_size, c
 
 /** Close filehandle if necessary and free all memory along with reader */
 GhtErr ght_reader_free(GhtReaderPtr reader);
+
+// TODO patrix : Verificar esta agregacíon! para el funcionamiento en C++
+
+void ght_init(void);
+GhtErr ght_schema_from_xml_str(const char *xmlstr, GhtSchemaPtr *schema);
+
 
 
 

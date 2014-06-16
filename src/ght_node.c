@@ -866,9 +866,6 @@ ght_node_set_z_avg(GhtNode *node, double z_avg)
 GhtErr
 ght_node_calculate_z(const GhtNode *node, GhtAttribute *attr, GhtSchema *schema)
 {
-
-    printf (">> ght_node_calculate_z() \n");
-
 	static int hash_array_len = GHT_MAX_HASH_LENGTH + 1;
 	GhtHash h[hash_array_len];
 	GhtAttribute *a;
