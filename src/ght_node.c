@@ -854,6 +854,19 @@ ght_node_filter_by_attribute(const GhtNode *node, const GhtFilter *filter, GhtNo
 }
 
 
+// Patrick - get hash from node
+GhtErr
+ght_node_get_hash(const GhtNode *node, GhtHash **hash)
+{
+    if ( ! node->hash )
+        return GHT_ERROR;
+
+    *hash = node->hash;
+    return GHT_OK;
+}
+
+
+
 GhtErr
 ght_node_set_z_avg(GhtNode *node, double z_avg)
 {
