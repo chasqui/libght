@@ -64,8 +64,7 @@ GhtErr ght_node_get_attributes(const GhtNodePtr node, GhtAttributePtr *attr);
 GhtErr ght_node_get_z_avg(const GhtNodePtr node, double *z_avg);
 
 
-GhtErr
-ght_node_get_hash(const GhtNodePtr node, GhtHash **hash)
+GhtErr ght_node_get_hash(const GhtNodePtr node, GhtHash **hash);
 
 /** Get hash
 GhtErr ght_node_get_children_list(const GhtNodePtr node);
