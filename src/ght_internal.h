@@ -231,8 +231,7 @@ GhtErr ght_node_get_attributes(const GhtNode *node, GhtAttribute **attr);
 GhtErr ght_node_new_from_hash(GhtHash *hash, GhtNode **node);
 
 /** Create a new code from a coordinate */
-GhtErr ght_node_new_from_coordinate(const GhtCoordinate *coord,
-		unsigned int resolution, GhtNode **node);
+GhtErr ght_node_new_from_coordinate(const GhtCoordinate *coord, unsigned int resolution, GhtNode **node);
 
 /** Fill a stringbuffer with a printout of the node tree */
 GhtErr ght_node_to_string(GhtNode *node, stringbuffer_t *sb, int level);
@@ -267,6 +266,12 @@ GhtErr ght_node_filter_by_attribute(const GhtNode *node,
 
 /** Write a byte representation of a node tree */
 GhtErr ght_node_write(const GhtNode *node, GhtWriter *writer);
+
+
+// Patrick : get hash from node
+GhtErr ght_node_get_hash(const GhtNode *node, GhtHash **hash);
+
+
 
 /** Write a byte representation of a node tree */
 GhtErr ght_node_read(GhtReader *reader, GhtNode **node);
