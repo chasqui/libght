@@ -125,6 +125,9 @@ struct GhtNodeList_t;
 
 typedef struct {
 	GhtHash *hash;
+
+	uint8_t ghtFlag;  // TODO flag representé par 8 bits, c'est à dire 8 espaces pour des valuers
+
 	struct GhtNodeList_t *children;
 	GhtAttribute *attributes;
 	double z_avg;   // TODO test pour la valeur Z moyenne
@@ -227,6 +230,12 @@ GhtErr ght_node_get_coordinate(const GhtNode *node, GhtCoordinate *coord);
 /** Get the attribute list handing off the node */
 GhtErr ght_node_get_attributes(const GhtNode *node, GhtAttribute **attr);
 
+
+
+/** TODO Verification de la valeur de FLAG ght */
+GhtErr ght_node_get_ghtFlag(const GhtNode *node);
+
+
 /** Create a new node from a hash */
 GhtErr ght_node_new_from_hash(GhtHash *hash, GhtNode **node);
 
@@ -270,7 +279,7 @@ GhtErr ght_node_write(const GhtNode *node, GhtWriter *writer);
 
 // Patrick : get hash from node
 GhtErr ght_node_get_hash(const GhtNode *node, GhtHash **hash);
-
+//GhtErr ght_node_get_ghtFlag(const GhtNode *node);
 
 
 /** Write a byte representation of a node tree */

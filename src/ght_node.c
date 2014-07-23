@@ -153,6 +153,9 @@ ght_node_new(GhtNode **node)
 	n->children = NULL;
 	n->attributes = NULL;
 	n->hash = NULL;
+
+	n->ghtFlag  = 0;   // TODO flag representé par 8 bits, c'est à dire 8 espaces pour des valuers
+
 	*node = n;
 	return GHT_OK;
 }
@@ -208,6 +211,17 @@ ght_node_get_coordinate(const GhtNode *node, GhtCoordinate *coord)
 	}
 	return ght_coordinate_from_hash(node->hash, coord);
 }
+
+
+/* TODO  Verification de la valuer ghtFlag */
+// static uint8_t ght_node_get_ghtFlag (const GhtNode *node)
+GhtErr
+ght_node_get_ghtFlag(const GhtNode *node)
+{
+	printf("-->Valeur ghtFlag: %i\n", node->ghtFlag);
+	return GHT_OK;
+}
+
 
 /** Create new node, taking ownership of hash parameter */
 GhtErr
@@ -616,6 +630,9 @@ ght_node_write(const GhtNode *node, GhtWriter *writer)
 		ght_attribute_write(attr, writer);
 		attr = attr->next;
 	}
+	/* Write the flagGHT */
+	// ght_write(GhtWriter *writer, const void *bytes, size_t bytesize)
+	ght_write(writer, &node->ghtFlag, 1);
 
 	/* Write the children */
 	if ( node->children )
@@ -642,6 +659,8 @@ ght_node_read(GhtReader *reader, GhtNode **node)
 	int i;
 	uint8_t attrcount;
 	uint8_t childcount;
+	uint8_t ghtFlag = 0; //TODO pour l'instant
+
 	GhtHash *hash = NULL;
 	GhtNode *n = NULL;
 	GhtAttribute *attr = NULL;
@@ -665,6 +684,11 @@ ght_node_read(GhtReader *reader, GhtNode **node)
 		GHT_TRY(ght_node_add_attribute(n, attr));
 		attrcount--;
 	}
+
+	/* Read the flagGHT */
+
+	ght_read(reader, &ghtFlag, 1);
+
 
 	/* Read the children */
 	ght_read(reader, &childcount, 1);
