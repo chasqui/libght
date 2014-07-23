@@ -1,0 +1,6 @@
+/usr/local/lib/libght.so.0.1.1
+/usr/local/lib/libght.so
+/usr/local/lib/libght.a
+/usr/local/include/ght.h
+/usr/local/include/ght_core.h
+/usr/local/bin/las2ght
